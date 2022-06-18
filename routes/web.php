@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\RekapController;
 use App\Http\Controllers\VerifikasiController;
 
 /*
@@ -30,3 +32,9 @@ Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifik
 Route::get('/verifikasi', [VerifikasiController::class, 'index'])->name('verifikasi.index');
 
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+
+Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
+
+Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
+
+
