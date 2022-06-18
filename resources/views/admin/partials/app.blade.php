@@ -36,7 +36,6 @@
             </footer>
         </div>
     </div>
-
     <script src={{ asset('be/assets/js/feather-icons/feather.min.js') }}></script>
     <script src={{ asset('be/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}></script>
     <script src={{ asset('be/assets/js/app.js') }}></script>

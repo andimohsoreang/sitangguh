@@ -30,6 +30,18 @@
                         <span>Riwayat Penanganan</span>
                     </a>
                 </li>
+                <li class="sidebar-item  ">
+                    <a href="{{ route('rekap.index') }}" class='sidebar-link'>
+                        <i data-feather="file-plus" width="20"></i>
+                        <span>Rekap Laporan</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  ">
+                    <a href="{{ route('petugas.index') }}" class='sidebar-link'>
+                        <i data-feather="file-plus" width="20"></i>
+                        <span>Daftar Petugas</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
