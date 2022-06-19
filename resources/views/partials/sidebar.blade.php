@@ -1,7 +1,10 @@
 <div id="sidebar" class='active'>
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
-            <h3 class="m-0">SITANGGUH</h3>
+            <div class="d-flex align-items-center gap-2">
+                <img src="{{ asset('be/assets/images/bpbdlogo.png') }}">
+                <h3 class="m-0">SITANGGUH</h3>
+            </div>
         </div>
         <div class="sidebar-menu">
             <ul class="menu">

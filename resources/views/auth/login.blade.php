@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between">
-                        <a class="color-danger" href="{{ route('login') }}">Belum punya akun? Register</a>
+                        <a class="color-danger" href="{{ route('register') }}">Belum punya akun? Register</a>
                         <div class="clearfix">
                             <button type="submit" class="btn btn-danger float-end">Login</button>
                         </div>

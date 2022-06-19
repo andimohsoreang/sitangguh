@@ -12,7 +12,7 @@
     <link rel="stylesheet" href={{ asset('be/assets/vendors/simple-datatables/style.css') }}>
     <link rel="stylesheet" href={{ asset('be/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}>
     <link rel="stylesheet" href={{ asset('be/assets/css/app.css') }}>
-    <link rel="shortcut icon" href={{ asset('be/assets/images/favicon.svg') }} type="image/x-icon">
+    <link rel="shortcut icon" href={{ asset('be/assets/images/bpbdlogo.png') }} type="image/x-icon">
 </head>
 
 <body>
