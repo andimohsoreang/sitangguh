@@ -1,4 +1,4 @@
-@extends('admin.partials.app')
+@extends('partials.app')
 @section('section')
 <div class="row">
     <div class="col-12 col-md-6 order-md-1 order-last">
@@ -24,13 +24,9 @@
             <table class='table table-striped' id="table1">
                 <thead>
                     <tr>
-                        <th>Jenis Bencana</th>
-                        <th>Kronologi</th>
-                        <th>Kerusakan</th>
-                        <th>Jumlah kerugian</th>
-                        <th>Tanggal</th>
-                        <th>Jam</th>
-                        <th>Status</th>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Email</th>
                         <th class="w-1">Aksi</th>
                     </tr>
                 </thead>
@@ -38,10 +34,6 @@
                     <tr>
                         <td>Kebakaran</td>
                         <td>Kronologi 1</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>10 November</td>
-                        <td>10:00 WITA</td>
                         <td>
                             <span class="badge bg-danger">Belum ditangani</span>
                         </td>
@@ -51,28 +43,6 @@
                             </button>
                             <button type="button" class="btn btn-warning">
                                 Tangani Laporan </span>
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                                Tolak Laporan</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Kebakaran</td>
-                        <td>Kronologi 1</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>10 November</td>
-                        <td>10:00 WITA</td>
-                        <td>
-                            <span class="badge bg-danger">Belum ditangani</span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary">
-                                Detail Laporan 
-                            </button>
-                            <button type="button" class="btn btn-warning">
-                                Tangani Laporan
                             </button>
                             <button type="button" class="btn btn-danger">
                                 Tolak Laporan</span>

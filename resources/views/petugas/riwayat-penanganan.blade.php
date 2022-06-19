@@ -1,5 +1,6 @@
 @extends('partials.app')
 @section('section')
-<h3>Dashboard</h3>
+
+<h3>Riwayat</h3>
 
 @endsection

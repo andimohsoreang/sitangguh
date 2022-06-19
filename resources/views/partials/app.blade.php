@@ -17,9 +17,9 @@
 
 <body>
     <div id="app">
-        @include('admin.partials.sidebar')
+        @include('partials.sidebar')
         <div id="main">
-            @include('admin.partials.navbar')
+            @include('partials.navbar')
 
             <div class="main-content container-fluid">
                 <div class="page-title">

@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\RekapController;
+use App\Http\Controllers\RoleViewController;
 use App\Http\Controllers\VerifikasiController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +23,28 @@ use App\Http\Controllers\VerifikasiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Auth::routes();
 
-Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+Route::group(['middleware' => ['auth','role:admin'], 'prefix' => 'admin'], function () {
+    Route::get('/', [RoleViewController::class, 'admin']);
+    Route::get('/dashboard', [RoleViewController::class, 'admin'])->name('admin.index');
+    Route::get('/notifikasi', [RoleViewController::class, 'adminNotifikasi'])->name('admin.notifikasi');
+    Route::get('/rekap', [RoleViewController::class, 'adminRekap'])->name('admin.rekap');
+    Route::get('/petugas', [RoleViewController::class, 'adminPetugas'])->name('admin.petugas');
+});
 
-Route::get('/verifikasi', [VerifikasiController::class, 'index'])->name('verifikasi.index');
+Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], function () {
+    Route::get('/', [RoleViewController::class, 'petugas']);
+    Route::get('/dashboard', [RoleViewController::class, 'petugas'])->name('petugas.index');
+    Route::get('/notifikasi', [RoleViewController::class, 'petugasNotifikasi'])->name('petugas.notifikasi');
+    Route::get('/verifikasi', [RoleViewController::class, 'petugasVerifikasi'])->name('petugas.verifikasi');
+    Route::get('/riwayat', [RoleViewController::class, 'petugasRiwayat'])->name('petugas.riwayat');
+});
 
-Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], function () {
+    Route::get('/', [RoleViewController::class, 'user']);
+    Route::get('/dashboard', [RoleViewController::class, 'user'])->name('user.index');
+    Route::get('/notifikasi', [RoleViewController::class, 'userNotifikasi'])->name('user.notifikasi');
+});
 
-Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
-
-Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
-
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
