@@ -29,12 +29,16 @@
                             <td>{{ $p->name }}</td>
                             <td>{{ $p->email }}</td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-warning">
-                                    <i data-feather="edit"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-danger">
-                                    <i data-feather="trash"></i>
-                                </button>
+                                <form action="{{ route('admin.destroy.petugas', $p->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <a href="{{ route('admin.edit.petugas', $p->id) }}" class="btn btn-sm icon btn-warning">
+                                        <i data-feather="edit"></i>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm icon btn-danger" onclick="return confirm('Yakin menghapus data ini?')">
+                                        <i data-feather="trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -109,6 +110,12 @@ class PetugasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $petugas = User::findOrFail($id);
+        $mhr = DB::table('model_has_roles')->where('model_id', $petugas->id);
+        $mhr->delete();
+        $petugas->delete();
+
+        Alert::success('Success', 'Berhasil menghapus petugas.');
+        return redirect()->route('admin.petugas');
     }
 }
