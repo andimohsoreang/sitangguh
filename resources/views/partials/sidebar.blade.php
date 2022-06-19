@@ -30,6 +30,14 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @role('user')
+                <li class="sidebar-item {{ request()->routeIs('user.laporanbencana') ? 'active' : '' }}">
+                    <a href="{{ route('user.laporanbencana') }}" class='sidebar-link'>
+                        <i data-feather="file-plus" width="20"></i>
+                        <span>Laporan Bencana</span>
+                    </a>
+                </li>
+                @endrole
                 <li class="sidebar-item 
                 {{ 
                     request()->routeIs('admin.notifikasi') || 

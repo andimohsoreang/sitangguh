@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaporanBencanaController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PetugasController;
@@ -50,6 +51,15 @@ Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], f
 Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], function () {
     Route::get('/', [RoleViewController::class, 'user']);
     Route::get('/dashboard', [RoleViewController::class, 'user'])->name('user.index');
+
+    Route::get('/laporanbencana', [LaporanBencanaController::class, 'index'])->name('user.laporanbencana');
+    Route::get('/laporanbencana/create', [LaporanBencanaController::class, 'create'])->name('user.create.laporanbencana');
+    Route::post('/laporanbencana/store', [LaporanBencanaController::class, 'store'])->name('user.store.laporanbencana');
+    Route::get('/laporanbencana/edit/{id}', [LaporanBencanaController::class, 'edit'])->name('user.edit.laporanbencana');
+    Route::put('/laporanbencana/update/{id}', [LaporanBencanaController::class, 'update'])->name('user.update.laporanbencana');
+    Route::delete('/laporanbencana/destroy/{id}', [LaporanBencanaController::class, 'destroy'])->name('user.destroy.laporanbencana');
+
+
     Route::get('/notifikasi', [RoleViewController::class, 'userNotifikasi'])->name('user.notifikasi');
 });
 
