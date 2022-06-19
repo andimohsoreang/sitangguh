@@ -30,7 +30,13 @@ Route::group(['middleware' => ['auth','role:admin'], 'prefix' => 'admin'], funct
     Route::get('/dashboard', [RoleViewController::class, 'admin'])->name('admin.index');
     Route::get('/notifikasi', [RoleViewController::class, 'adminNotifikasi'])->name('admin.notifikasi');
     Route::get('/rekap', [RoleViewController::class, 'adminRekap'])->name('admin.rekap');
-    Route::get('/petugas', [RoleViewController::class, 'adminPetugas'])->name('admin.petugas');
+
+    Route::get('/petugas', [PetugasController::class, 'index'])->name('admin.petugas');
+    Route::get('/petugas/create', [PetugasController::class, 'create'])->name('admin.create.petugas');
+    Route::post('/petugas/store', [PetugasController::class, 'store'])->name('admin.store.petugas');
+    Route::get('/petugas/edit/{id}', [PetugasController::class, 'edit'])->name('admin.edit.petugas');
+    Route::put('/petugas/update/{id}', [PetugasController::class, 'update'])->name('admin.update.petugas');
+    Route::delete('/petugas/destroy/{id}', [PetugasController::class, 'destroy'])->name('admin.destroy.petugas');
 });
 
 Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], function () {

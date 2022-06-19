@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PetugasController extends Controller
 {
@@ -13,7 +16,11 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        return view('admin.petugas');
+        $petugas = User::whereHas('roles', function ($q) {
+            $q->Where('name', 'petugas');
+        })->get();
+
+        return view('admin.petugas.home', compact('petugas'));
     }
 
     /**
@@ -23,7 +30,7 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.petugas.create');
     }
 
     /**
@@ -34,7 +41,30 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+        ]);
+
+        $petugas = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $petugas->assignRole('petugas');
+
+        if ($petugas)
+        {
+            Alert::success('Success', 'Berhasil menambah petugas.');
+            return redirect()->route('admin.petugas');
+        }
+        else
+        {
+            Alert::error('Failed', 'Gagal menambah petugas.');
+            return redirect()->route('admin.petugas');
+        }
     }
 
     /**
