@@ -87,7 +87,8 @@ class PetugasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $petugas = User::findOrFail($id);
+        return view('admin.petugas.edit', compact('petugas'));
     }
 
     /**
@@ -99,7 +100,43 @@ class PetugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email']
+
+        ]);
+
+        $petugas = User::findOrFail($id);
+
+        if ($request->input('password'))
+        {
+            $petugas_data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ];
+        }
+        else
+        {
+            $petugas_data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $petugas->password,
+            ];
+        }
+
+        $petugas->update($petugas_data);
+
+        if ($petugas)
+        {
+            Alert::success('Success', 'Berhasil mengupdate petugas.');
+            return redirect()->route('admin.petugas');
+        }
+        else
+        {
+            Alert::error('Failed', 'Gagal mengupdate petugas.');
+            return redirect()->route('admin.petugas');
+        }
     }
 
     /**
