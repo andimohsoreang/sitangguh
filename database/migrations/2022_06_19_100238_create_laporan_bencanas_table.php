@@ -18,9 +18,8 @@ class CreateLaporanBencanasTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('kronologi');
             $table->string('bukti');
-            $table->string('lat');
-            $table->string('long');
-            $table->enum('status', ['proses', 'selesai']);
+            $table->string('url_gmaps');
+            $table->enum('status', ['tunggu', 'proses', 'selesai']);
             $table->boolean('read');
             $table->timestamps();
         });

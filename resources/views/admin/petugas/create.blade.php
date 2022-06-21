@@ -11,7 +11,7 @@
 </div>
 <section class="section">
     <div class="row">
-        <div class="col-6">            
+        <div class="col-12 col-lg-6">            
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.store.petugas') }}" method="post">

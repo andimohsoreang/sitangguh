@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\LaporanBencana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporanBencanaController extends Controller
 {
@@ -35,7 +37,41 @@ class LaporanBencanaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal' => ['required'],
+            'waktu' => ['required'],
+            'kronologi' => ['required'],
+            'lokasi' => ['required'],
+            'bukti' => ['required', 'image', 'mimes:png,jpg,jpeg'],
+        ]);
+
+        // dd($request->bukti);
+
+        $bukti = $request->bukti;
+        $new_bukti = time().$bukti->getClientOriginalName();
+
+        $lb = LaporanBencana::create([
+            'user_id' => Auth::user()->id,
+            'kronologi' => $request->kronologi,
+            'url_gmaps' => $request->lokasi,
+            'bukti' => 'uploads/laporanbencana/'.$new_bukti,
+            'status' => 'tunggu',
+            'read' => false,
+            'tanggal' => $request->tanggal,
+            'waktu' => $request->waktu,
+        ]);
+
+        if ($lb)
+        {
+            $bukti->move('uploads/laporanbencana/', $new_bukti);
+            Alert::success('Success', 'Berhasil menambah laporan.');
+            return redirect()->route('user.laporanbencana');
+        }
+        else
+        {
+            Alert::error('Failed', 'Gagal menambah laporan.');
+            return redirect()->route('user.laporanbencana');
+        }
     }
 
     /**
