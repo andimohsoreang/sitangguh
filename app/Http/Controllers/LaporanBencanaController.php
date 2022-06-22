@@ -169,8 +169,16 @@ class LaporanBencanaController extends Controller
      * @param  \App\Models\LaporanBencana  $laporanBencana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LaporanBencana $laporanBencana)
+    public function destroy($id)
     {
-        //
+        $lp = LaporanBencana::findOrFail($id);
+        $destination = $lp->bukti;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $lp->delete();
+
+        Alert::success('Success', 'Berhasil menghapus laporan.');
+        return redirect()->route('user.laporanbencana');
     }
 }
