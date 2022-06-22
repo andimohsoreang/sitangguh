@@ -17,31 +17,60 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th width="20%">Aksi</th>
+                        <th>Kronologi</th>
+                        <th>Bukti</th>
+                        <th>Lokasi</th>
+                        <th>Status</th>
+                        <th>Dilihat</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($petugas as $p)                        
+                    @foreach ($laporan_bencana as $lp)                        
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->name }}</td>
-                            <td>{{ $p->email }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($lp->kronologi), 60, '...') }}</td>
                             <td>
-                                <form action="{{ route('admin.destroy.petugas', $p->id) }}" method="post">
+                                <div class="image-link">
+                                    <a href="{{ asset($lp->bukti) }}" class="btn btn-sm btn-primary" target="_blank"><i data-feather="image"></i></a>
+                                </div>
+                            </td>
+                            <td><a href="{{ $lp->url_gmaps }}" class="btn btn-sm btn-primary" target="_blank"><i data-feather="map"></i></a></td>
+                            <td>
+                                @if ($lp->status == "tunggu")
+                                    <span class="badge bg-secondary">Tunggu</span>
+                                @elseif ($lp->status == "proses")
+                                    <span class="badge bg-info">Proses</span>
+                                @else
+                                    <span class="badge bg-success">Selesai</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($lp->read == 0)
+                                    <span class="badge bg-danger badge-pill badge-round px-0 py-1"><i data-feather="circle"></i></span>
+                                @else
+                                    <span class="badge bg-success badge-pill badge-round px-0 py-1"><i data-feather="circle"></i></span>
+                                @endif
+                            </td>
+                            <td>
+                                <form action="{{ route('user.destroy.laporanbencana', $lp->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('admin.edit.petugas', $p->id) }}" class="btn btn-sm icon btn-warning">
-                                        <i data-feather="edit"></i>
+                                    <a href="{{ route('user.show.laporanbencana', $lp->id) }}" class="btn btn-sm icon btn-secondary">
+                                        <i data-feather="eye"></i>
                                     </a>
+                                    @if ($lp->read == 0)
+                                        <a href="{{ route('user.edit.laporanbencana', $lp->id) }}" class="btn btn-sm icon btn-warning">
+                                            <i data-feather="edit"></i>
+                                        </a>  
+                                    @endif
                                     <button type="submit" class="btn btn-sm icon btn-danger" onclick="return confirm('Yakin menghapus data ini?')">
                                         <i data-feather="trash"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

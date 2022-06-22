@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], functio
     Route::get('/laporanbencana', [LaporanBencanaController::class, 'index'])->name('user.laporanbencana');
     Route::get('/laporanbencana/create', [LaporanBencanaController::class, 'create'])->name('user.create.laporanbencana');
     Route::post('/laporanbencana/store', [LaporanBencanaController::class, 'store'])->name('user.store.laporanbencana');
+    Route::get('/laporanbencana/show/{id}', [LaporanBencanaController::class, 'show'])->name('user.show.laporanbencana');
     Route::get('/laporanbencana/edit/{id}', [LaporanBencanaController::class, 'edit'])->name('user.edit.laporanbencana');
     Route::put('/laporanbencana/update/{id}', [LaporanBencanaController::class, 'update'])->name('user.update.laporanbencana');
     Route::delete('/laporanbencana/destroy/{id}', [LaporanBencanaController::class, 'destroy'])->name('user.destroy.laporanbencana');
