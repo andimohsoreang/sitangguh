@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RoleViewController extends Controller
 {
@@ -51,21 +53,15 @@ class RoleViewController extends Controller
     // User
     public function user()
     {
-        return view('user.home');
-    }
-
-    public function userAlur()
-    {
-        return view('user.alur-laporan');
-    }
-
-    public function userNotifikasi()
-    {
-        return view('user.notifikasi');
-    }
-
-    public function userLaporan()
-    {
-        return view('user.laporan-terkirim');
+        $lb_total = DB::table('laporan_bencanas')
+                        ->where('user_id', Auth::user()->id)
+                        ->count();
+        $lb_selesai = DB::table('laporan_bencanas')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('status', 'selesai')->count();
+        $lb_tolak = DB::table('laporan_bencanas')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('status', 'tolak')->count();
+        return view('user.home', compact('lb_total','lb_selesai','lb_tolak'));
     }
 }

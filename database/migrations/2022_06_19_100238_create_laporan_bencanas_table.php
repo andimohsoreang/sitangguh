@@ -19,7 +19,7 @@ class CreateLaporanBencanasTable extends Migration
             $table->text('kronologi');
             $table->string('bukti');
             $table->string('url_gmaps');
-            $table->enum('status', ['tunggu', 'proses', 'selesai']);
+            $table->enum('status', ['tunggu', 'tolak', 'proses', 'selesai']);
             $table->boolean('read');
             $table->timestamps();
         });
