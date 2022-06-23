@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanBencanaController;
+use App\Http\Controllers\LaporanTerkirimController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PetugasController;
@@ -61,7 +62,7 @@ Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], functio
     Route::delete('/laporanbencana/destroy/{id}', [LaporanBencanaController::class, 'destroy'])->name('user.destroy.laporanbencana');
 
 
-    Route::get('/notifikasi', [RoleViewController::class, 'userNotifikasi'])->name('user.notifikasi');
+    Route::get('/laporanterkirim', [LaporanTerkirimController::class, 'index'])->name('user.laporanterkirim');
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

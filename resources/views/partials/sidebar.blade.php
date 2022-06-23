@@ -33,31 +33,17 @@
                 @role('user')
                 <li class="sidebar-item {{ request()->routeIs('user.laporanbencana') ? 'active' : '' }}">
                     <a href="{{ route('user.laporanbencana') }}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
+                        <i data-feather="flag" width="20"></i>
                         <span>Laporan Bencana</span>
                     </a>
                 </li>
-                @endrole
-                <li class="sidebar-item 
-                {{ 
-                    request()->routeIs('admin.notifikasi') || 
-                    request()->routeIs('petugas.notifikasi') || 
-                    request()->routeIs('user.notifikasi') 
-                    ? 'active' : ''
-                }}">
-                    @role('admin')
-                        <a href="{{ route('admin.notifikasi') }}" class='sidebar-link'>
-                    @endrole
-                    @role('petugas')
-                        <a href="{{ route('petugas.notifikasi') }}" class='sidebar-link'>
-                    @endrole
-                    @role('user')
-                        <a href="{{ route('user.notifikasi') }}" class='sidebar-link'>
-                    @endrole
-                        <i data-feather="file-plus" width="20"></i>
-                        <span>Notifikasi</span>
+                <li class="sidebar-item {{ request()->routeIs('user.laporanterkirim') ? 'active' : '' }}">
+                    <a href="{{ route('user.laporanterkirim') }}" class='sidebar-link'>
+                        <i data-feather="check-square" width="20"></i>
+                        <span>Laporan Terkirim</span>
                     </a>
                 </li>
+                @endrole
                 @role('petugas')
                 <li class="sidebar-item {{ request()->routeIs('petugas.verifikasi') ? 'active' : '' }}">
                     <a href="{{ route('petugas.verifikasi') }}" class='sidebar-link'>
