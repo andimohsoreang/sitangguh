@@ -7,37 +7,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
-            <li class="dropdown nav-icon">
-                <a href="#" data-bs-toggle="dropdown"
-                    class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                    <div class="d-lg-inline-block">
-                        <i data-feather="bell"></i>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
-                    <h6 class='py-2 px-4'>Notifications</h6>
-                    <ul class="list-group rounded-none">
-                        <li class="list-group-item border-0 align-items-start">
-                            <div class="avatar bg-success me-3">
-                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
-                            </div>
-                            <div>
-                                <h6 class='text-bold'>New Order</h6>
-                                <p class='text-xs'>
-                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
             <li class="dropdown">
                 <a href="#" data-bs-toggle="dropdown"
                     class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                    <div class="d-none d-md-block d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
+                    <div class="d-flex align-items-center gap-1">
+                        <i data-feather="smile"></i>
+                        <div class="d-none d-md-block d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
+                    </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
+                    @role('user')
                     <a class="dropdown-item" href="{{ route('user.profile') }}"><i data-feather="user"></i> Profile</a>
+                    @endrole
+                    @role('petugas')
+                    <a class="dropdown-item" href="{{ route('petugas.profile') }}"><i data-feather="user"></i> Profile</a>
+                    @endrole
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item" href="{{ route('logout') }}"><i data-feather="log-out"></i> Logout</button>

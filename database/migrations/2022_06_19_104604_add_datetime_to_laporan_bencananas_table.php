@@ -16,8 +16,8 @@ class AddDatetimeToLaporanBencananasTable extends Migration
         Schema::table('laporan_bencanas', function (Blueprint $table) {
             $table->date('tanggal');
             $table->time('waktu');
-            $table->text('kerusakan');
-            $table->string('kerugian');
+            $table->text('kerusakan')->nullable();
+            $table->string('kerugian')->nullable();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LaporanBencana;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,41 @@ class RoleViewController extends Controller
 
     public function petugasNotifikasi()
     {
-        return view('petugas.notifikasi');
+        $laporan_bencana = DB::table('laporan_bencanas')
+                            ->where('status', 'tunggu')
+                            ->get();
+        return view('petugas.notifikasi', compact('laporan_bencana'));
+    }
+
+    public function petugasTangani($id)
+    {
+        $lpb = LaporanBencana::findorfail($id);
+        $lpb->update([
+            'status' => 'proses',
+            'read' => true,
+        ]);
+
+        Alert::success('Success', 'Tangani Laporan.');
+
+        return redirect()->route('petugas.notifikasi');
+    }
+
+    public function petugasTolak($id)
+    {
+        $lpb = LaporanBencana::findorfail($id);
+        $lpb->update([
+            'status' => 'tolak',
+            'read' => true,
+        ]);
+
+        Alert::success('Success', 'Tolak Laporan.');
+
+        return redirect()->route('petugas.notifikasi');
+    }
+
+    public function petugasUpdateNotifikasi()
+    {
+
     }
 
     public function petugasRiwayat()
@@ -71,7 +106,7 @@ class RoleViewController extends Controller
 
     public function userProfile()
     {
-        return view('user.profile');
+        return view('profile');
     }
 
     public function userupdateprofile(Request $request, $id)
@@ -91,7 +126,11 @@ class RoleViewController extends Controller
 
         Alert::success('Success', 'Berhasil memperbaruhi data.');
 
-        return redirect()->route('user.profile');
+        if ($user->hasRole('petugas')) {
+            return redirect()->route('petugas.profile');
+        } else if ($user->hasRole('user')) {
+            return redirect()->route('user.profile');
+        }
     }
 
     public function userupdatepassword(Request $request, $id)
@@ -109,6 +148,10 @@ class RoleViewController extends Controller
 
         Alert::success('Success', 'Berhasil memperbaruhi password.');
 
-        return redirect()->route('user.profile');
+        if ($user->hasRole('petugas')) {
+            return redirect()->route('petugas.profile');
+        } else if ($user->hasRole('user')) {
+            return redirect()->route('user.profile');
+        }
     }
 }

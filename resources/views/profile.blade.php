@@ -14,7 +14,12 @@
         <div class="col-12 col-lg-6">            
             <div class="card">
                 <div class="card-body">
+                    @role('user')
                     <form action="{{ route('user.update.profile', Auth::user()->id) }}" method="post">
+                    @endrole
+                    @role('petugas')
+                    <form action="{{ route('petugas.update.profile', Auth::user()->id) }}" method="post">
+                    @endrole
                         @csrf
                         @method('put')
                         <div class="form-group">
@@ -59,7 +64,12 @@
                     <h6 class="m-0 fw-bold">Update Password</h6>
                 </div>
                 <div class="card-body">
+                    @role('user')
                     <form action="{{ route('user.update.password', Auth::user()->id) }}" method="post">
+                    @endrole
+                    @role('petugas')
+                    <form action="{{ route('petugas.update.password', Auth::user()->id) }}" method="post">
+                    @endrole
                         @csrf
                         @method('put')
                         <div class="form-group">

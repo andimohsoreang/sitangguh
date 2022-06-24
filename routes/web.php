@@ -44,7 +44,16 @@ Route::group(['middleware' => ['auth','role:admin'], 'prefix' => 'admin'], funct
 Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], function () {
     Route::get('/', [RoleViewController::class, 'petugas']);
     Route::get('/dashboard', [RoleViewController::class, 'petugas'])->name('petugas.index');
+
+    Route::get('/profile', [RoleViewController::class, 'userprofile'])->name('petugas.profile');
+    Route::put('/profile/{id}', [RoleViewController::class, 'userupdateprofile'])->name('petugas.update.profile');
+    Route::put('/password/{id}', [RoleViewController::class, 'userupdatepassword'])->name('petugas.update.password');
+    
     Route::get('/notifikasi', [RoleViewController::class, 'petugasNotifikasi'])->name('petugas.notifikasi');
+    Route::put('/notifikasi/tangani/{id}', [RoleViewController::class, 'petugasTangani'])->name('petugas.tangani');
+    Route::put('/notifikasi/tolak/{id}', [RoleViewController::class, 'petugasTolak'])->name('petugas.tolak');
+
+    
     Route::get('/verifikasi', [RoleViewController::class, 'petugasVerifikasi'])->name('petugas.verifikasi');
     Route::get('/riwayat', [RoleViewController::class, 'petugasRiwayat'])->name('petugas.riwayat');
 });

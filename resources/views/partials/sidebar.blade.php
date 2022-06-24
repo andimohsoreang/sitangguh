@@ -45,15 +45,24 @@
                 </li>
                 @endrole
                 @role('petugas')
+                <li class="sidebar-item {{ request()->routeIs('petugas.notifikasi') ? 'active' : '' }}">
+                    <a href="{{ route('petugas.notifikasi') }}" class='sidebar-link'>
+                        <i data-feather="bell" width="20"></i>
+                        <span>Notifikasi</span>
+                        @if ($lpbencana != 0)
+                            <span class="badge bg-danger badge-pill badge-round text-white">{{ $lpbencana }}</span>
+                        @endif
+                    </a>
+                </li>
                 <li class="sidebar-item {{ request()->routeIs('petugas.verifikasi') ? 'active' : '' }}">
                     <a href="{{ route('petugas.verifikasi') }}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
+                        <i data-feather="check-square" width="20"></i>
                         <span>Verifikasi Bencana</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ request()->routeIs('petugas.riwayat') ? 'active' : '' }}">
                     <a href="{{ route('petugas.riwayat') }}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
+                        <i data-feather="file-text" width="20"></i>
                         <span>Riwayat Penanganan</span>
                     </a>
                 </li>
