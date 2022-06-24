@@ -37,7 +37,7 @@
                     <div class="d-none d-md-block d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
+                    <a class="dropdown-item" href="{{ route('user.profile') }}"><i data-feather="user"></i> Profile</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item" href="{{ route('logout') }}"><i data-feather="log-out"></i> Logout</button>

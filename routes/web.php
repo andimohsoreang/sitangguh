@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], f
 Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], function () {
     Route::get('/', [RoleViewController::class, 'user']);
     Route::get('/dashboard', [RoleViewController::class, 'user'])->name('user.index');
+    Route::get('/profile', [RoleViewController::class, 'userprofile'])->name('user.profile');
+    Route::put('/profile/{id}', [RoleViewController::class, 'userupdateprofile'])->name('user.update.profile');
+    Route::put('/password/{id}', [RoleViewController::class, 'userupdatepassword'])->name('user.update.password');
 
     Route::get('/laporanbencana', [LaporanBencanaController::class, 'index'])->name('user.laporanbencana');
     Route::get('/laporanbencana/create', [LaporanBencanaController::class, 'create'])->name('user.create.laporanbencana');
