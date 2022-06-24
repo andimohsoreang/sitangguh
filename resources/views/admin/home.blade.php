@@ -1,4 +1,4 @@
-@extends('admin.partials.app')
+@extends('partials.app')
 @section('section')
 <h3>Dashboard</h3>
 
