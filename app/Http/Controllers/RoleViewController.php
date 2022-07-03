@@ -37,7 +37,15 @@ class RoleViewController extends Controller
     // Petugas
     public function petugas()
     {
-        return view('petugas.home');
+        $lb_total = DB::table('laporan_bencanas')
+                ->count();
+        $lb_selesai = DB::table('laporan_bencanas')
+                ->where('status', 'selesai')->count();
+        $lb_proses = DB::table('laporan_bencanas')
+                ->where('status', 'proses')->count();
+        $lb_tolak = DB::table('laporan_bencanas')
+                ->where('status', 'tolak')->count();
+        return view('petugas.home', compact('lb_total', 'lb_selesai', 'lb_proses', 'lb_tolak'));
     }
 
     public function petugasNotifikasi()
@@ -74,20 +82,50 @@ class RoleViewController extends Controller
         return redirect()->route('petugas.notifikasi');
     }
 
-    public function petugasUpdateNotifikasi()
+    public function petugasVerifikasi()
     {
+        $laporan_bencana = DB::table('laporan_bencanas')
+                            ->where('status', 'proses')
+                            ->get();
+        return view('petugas.verifikasi-bencana', compact('laporan_bencana'));
+    }
 
+    public function petugasVerifikasiForm($id)
+    {
+        $lpb = LaporanBencana::findorfail($id);
+        return view('petugas.verifikasi-form', compact('lpb'));
+    }
+
+    public function petugasVerifikasiFormUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'kronologi' => ['required'],
+            'kerusakan' => ['required'],
+            'kerugian' => ['required'],
+        ]);
+
+        $lpb = LaporanBencana::findorfail($id);
+        
+        $lpb->update([
+            'status' => 'selesai',
+            'kronologi' => $request->kronologi,
+            'kerusakan' => $request->kerusakan,
+            'kerugian' => $request->kerugian,
+        ]);
+
+        Alert::success('Success', 'Berhasil Verifikasi Laporan.');
+
+        return redirect()->route('petugas.verifikasi');
     }
 
     public function petugasRiwayat()
     {
-        return view('petugas.riwayat-penanganan');
+        $laporan_bencana = DB::table('laporan_bencanas')
+                            ->where('status', 'selesai')
+                            ->get();
+        return view('petugas.riwayat-penanganan', compact('laporan_bencana'));
     }
 
-    public function petugasVerifikasi()
-    {
-        return view('petugas.verifikasi-bencana');
-    }
 
     // User
     public function user()
