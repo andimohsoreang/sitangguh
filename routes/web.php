@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], f
 
     
     Route::get('/verifikasi', [RoleViewController::class, 'petugasVerifikasi'])->name('petugas.verifikasi');
+    Route::get('/verifikasi/{id}', [RoleViewController::class, 'petugasVerifikasiForm'])->name('petugas.verifikasiform');
+    Route::put('/verifikasi/{id}', [RoleViewController::class, 'petugasVerifikasiFormUpdate'])->name('petugas.update.verifikasiform');
+
     Route::get('/riwayat', [RoleViewController::class, 'petugasRiwayat'])->name('petugas.riwayat');
 });
 

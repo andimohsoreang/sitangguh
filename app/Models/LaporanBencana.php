@@ -18,6 +18,8 @@ class LaporanBencana extends Model
         'read',
         'tanggal',
         'waktu',
+        'kerusakan',
+        'kerugian',
     ];
 
     public function user()
