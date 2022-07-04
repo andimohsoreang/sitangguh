@@ -52,19 +52,36 @@ class RoleViewController extends Controller
     {
         $laporan_bencana = DB::table('laporan_bencanas')
                             ->where('status', 'tunggu')
+                            ->orderBy('id', 'desc')
                             ->get();
         return view('petugas.notifikasi', compact('laporan_bencana'));
+    }
+
+    public function petugasNotifikasiShow($id)
+    {
+        $lpb = LaporanBencana::findorfail($id);
+        if ($lpb->status != true) {
+            $lpb->update([ 'read' => true ]);
+        }
+
+        return view('petugas.notifikasi-show', compact('lpb'));
     }
 
     public function petugasTangani($id)
     {
         $lpb = LaporanBencana::findorfail($id);
-        $lpb->update([
-            'status' => 'proses',
-            'read' => true,
-        ]);
+        if ($lpb->status != true) {
+            $lpb->update([
+                'status' => 'proses',
+                'read' => true,
+            ]);
+        } else {
+            $lpb->update([
+                'status' => 'proses',
+            ]);
+        }
 
-        Alert::success('Success', 'Tangani Laporan.');
+        Alert::success('Success', 'Tangani Laporan. Silahkan cek dibagian menu Verifikasi Bencana');
 
         return redirect()->route('petugas.notifikasi');
     }
@@ -72,10 +89,16 @@ class RoleViewController extends Controller
     public function petugasTolak($id)
     {
         $lpb = LaporanBencana::findorfail($id);
-        $lpb->update([
-            'status' => 'tolak',
-            'read' => true,
-        ]);
+        if ($lpb->status != true) {
+            $lpb->update([
+                'status' => 'tolak',
+                'read' => true,
+            ]);
+        } else {
+            $lpb->update([
+                'status' => 'tolak',
+            ]);
+        }
 
         Alert::success('Success', 'Tolak Laporan.');
 
@@ -86,6 +109,7 @@ class RoleViewController extends Controller
     {
         $laporan_bencana = DB::table('laporan_bencanas')
                             ->where('status', 'proses')
+                            ->orderBy('id', 'desc')
                             ->get();
         return view('petugas.verifikasi-bencana', compact('laporan_bencana'));
     }
@@ -122,6 +146,7 @@ class RoleViewController extends Controller
     {
         $laporan_bencana = DB::table('laporan_bencanas')
                             ->where('status', 'selesai')
+                            ->orderBy('id', 'desc')
                             ->get();
         return view('petugas.riwayat-penanganan', compact('laporan_bencana'));
     }

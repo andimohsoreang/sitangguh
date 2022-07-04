@@ -50,15 +50,18 @@ Route::group(['middleware' => ['auth','role:petugas'], 'prefix' => 'petugas'], f
     Route::put('/password/{id}', [RoleViewController::class, 'userupdatepassword'])->name('petugas.update.password');
     
     Route::get('/notifikasi', [RoleViewController::class, 'petugasNotifikasi'])->name('petugas.notifikasi');
+    Route::get('/notifikasi/{id}', [RoleViewController::class, 'petugasNotifikasiShow'])->name('petugas.show.notifikasi');
     Route::put('/notifikasi/tangani/{id}', [RoleViewController::class, 'petugasTangani'])->name('petugas.tangani');
     Route::put('/notifikasi/tolak/{id}', [RoleViewController::class, 'petugasTolak'])->name('petugas.tolak');
 
     
     Route::get('/verifikasi', [RoleViewController::class, 'petugasVerifikasi'])->name('petugas.verifikasi');
+    Route::get('/verifikasi/detail/{id}', [RoleViewController::class, 'petugasNotifikasiShow'])->name('petugas.show.verifikasi');
     Route::get('/verifikasi/{id}', [RoleViewController::class, 'petugasVerifikasiForm'])->name('petugas.verifikasiform');
     Route::put('/verifikasi/{id}', [RoleViewController::class, 'petugasVerifikasiFormUpdate'])->name('petugas.update.verifikasiform');
 
     Route::get('/riwayat', [RoleViewController::class, 'petugasRiwayat'])->name('petugas.riwayat');
+    Route::get('/riwayat/detail/{id}', [RoleViewController::class, 'petugasNotifikasiShow'])->name('petugas.show.riwayat');
 });
 
 Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], function () {

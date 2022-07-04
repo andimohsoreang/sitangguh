@@ -1,5 +1,6 @@
 @extends('partials.app', ['title' => '| Notifikasi'])
 @section('section')
+@include('sweetalert::alert')
 <div class="d-flex align-items-center justify-content-between">
     <div>
         <h3>Notifikasi</h3>
@@ -47,13 +48,13 @@
                             <span>Tunggu</span>
                         </div>
                         <div class="d-flex gap-2">
-                            <a href="" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
-                            <form action="{{ route('petugas.tangani', $lb->id) }}" method="post">
+                            <a href="{{ route('petugas.show.notifikasi', $lb->id) }}" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
+                            <form action="{{ route('petugas.tangani', $lb->id) }}" method="post" onsubmit="return confirm('Konfirmasi untuk tangani laporan.')">
                                 @csrf
                                 @method('put')
                                 <button type="submit" class="btn btn-sm icon btn-success"><i data-feather="check-circle"></i> Tangani Laporan</button>
                             </form>
-                            <form action="{{ route('petugas.tolak', $lb->id) }}" method="post">
+                            <form action="{{ route('petugas.tolak', $lb->id) }}" method="post" onsubmit="return confirm('Konfirmasi untuk tolak laporan.')">
                                 @csrf
                                 @method('put')
                                 <button type="submit" class="btn btn-sm icon btn-danger"><i data-feather="x-circle"></i> Tolak Laporan</button>
