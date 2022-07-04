@@ -68,6 +68,44 @@
                 </li>
                 @endrole
                 @role('admin')
+                <li class="sidebar-item has-sub 
+                    @if (
+                        request()->routeIs('laporan.tunggu') || 
+                        request()->routeIs('laporan.tolak') || 
+                        request()->routeIs('laporan.proses') || 
+                        request()->routeIs('laporan.selesai')
+                    )
+                        active 
+                    @endif
+                ">
+                    <a href="#" class='sidebar-link'>
+                        <i data-feather="flag" width="20"></i> 
+                        <span>Laporan Bencana</span>
+                    </a>
+                    <ul class="submenu
+                    @if (
+                        request()->routeIs('laporan.tunggu') || 
+                        request()->routeIs('laporan.tolak') || 
+                        request()->routeIs('laporan.proses') || 
+                        request()->routeIs('laporan.selesai')
+                    )
+                        active 
+                    @endif
+                    ">
+                        <li>
+                            <a href="{{ route('laporan.tunggu') }}">Tunggu</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.tolak') }}">Ditolak</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.proses') }}">Proses</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.selesai') }}">Selesai</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="sidebar-item {{ request()->routeIs('admin.rekap') ? 'active' : '' }}">
                     <a href="{{ route('admin.rekap') }}" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i>

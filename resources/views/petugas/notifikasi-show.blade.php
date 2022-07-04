@@ -53,6 +53,14 @@
                             <span class="badge bg-success">Selesai</span>
                         @endif
                     </div>
+                    <div class="form-group">
+                        <h5>Petugas</h5>
+                        <p class="m-0">{{ $lpb->petugas->name }}</p>
+                    </div>
+                    <div class="form-group">
+                        <h5>Pelapor</h5>
+                        <p class="m-0">{{ $lpb->user->name }}</p>
+                    </div>
                 </div>
             </div>
         </div>

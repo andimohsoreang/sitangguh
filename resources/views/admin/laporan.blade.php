@@ -3,11 +3,18 @@
 @include('sweetalert::alert')
 <div class="d-flex align-items-center justify-content-between">
     <div>
-        <h3>Daftar Laporan Bencana</h3>
+        <h3>Daftar Laporan Bencana - 
+            @if (request()->routeIs('laporan.tunggu'))
+                 Tunggu
+            @elseif (request()->routeIs('laporan.tolak'))
+                 Tolak
+            @elseif (request()->routeIs('laporan.proses'))
+                 Proses
+            @elseif (request()->routeIs('laporan.selesai'))
+                 Selesai
+            @endif
+        </h3>
         <p class="text-subtitle text-muted">Informasi laporan bencana.</p>
-    </div>
-    <div>
-        <a href="{{ route('user.create.laporanbencana') }}" class="btn btn-sm btn-primary"><i data-feather="plus"></i> Tambah Laporan Bencana</a>
     </div>
 </div>
 <section class="section">
@@ -27,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($laporan_bencana as $lp)                        
+                    @foreach ($lpb as $lp)                        
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ \Illuminate\Support\Str::limit(strip_tags($lp->kronologi), 60, '...') }}</td>
@@ -57,21 +64,9 @@
                             </td>
                             <td>{{ $lp->petugas->name }}</td>
                             <td>
-                                <form action="{{ route('user.destroy.laporanbencana', $lp->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <a href="{{ route('user.show.laporanbencana', $lp->id) }}" class="btn btn-sm icon btn-secondary">
-                                        <i data-feather="eye"></i>
-                                    </a>
-                                    @if ($lp->read == 0)
-                                        <a href="{{ route('user.edit.laporanbencana', $lp->id) }}" class="btn btn-sm icon btn-warning">
-                                            <i data-feather="edit"></i>
-                                        </a>  
-                                    @endif
-                                    <button type="submit" class="btn btn-sm icon btn-danger" onclick="return confirm('Yakin menghapus data ini?')">
-                                        <i data-feather="trash"></i>
-                                    </button>
-                                </form>
+                                <a href="{{ route('laporan.show', $lp->id) }}" class="btn btn-sm icon btn-secondary">
+                                    <i data-feather="eye"></i> Detail
+                                </a>
                             </td>
                         </tr>
                     @endforeach

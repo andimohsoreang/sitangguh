@@ -38,6 +38,16 @@
                                 <td>&nbsp;:&nbsp;</td>
                                 <td><p class="m-0 small"></p></td>
                             </tr>
+                            <tr>
+                                <td><p class="m-0 fw-bold small">Petugas</p></td>
+                                <td>&nbsp;:&nbsp;</td>
+                                <td><p class="m-0 small">{{ $lb->petugas->name }}</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="m-0 fw-bold small">Pelapor</p></td>
+                                <td>&nbsp;:&nbsp;</td>
+                                <td><p class="m-0 small">{{ $lb->user->name }}</p></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
