@@ -20,10 +20,14 @@ class LaporanBencana extends Model
         'waktu',
         'kerusakan',
         'kerugian',
+        'petugas_id',
     ];
+
+    protected $with = ['user'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'petugas_id', 'id');
     }
+
 }

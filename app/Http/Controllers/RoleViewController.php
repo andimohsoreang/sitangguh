@@ -38,12 +38,18 @@ class RoleViewController extends Controller
     public function petugas()
     {
         $lb_total = DB::table('laporan_bencanas')
+                ->where('petugas_id', Auth::user()->id)
                 ->count();
         $lb_selesai = DB::table('laporan_bencanas')
-                ->where('status', 'selesai')->count();
+                ->where('status', 'selesai')
+                ->where('petugas_id', Auth::user()->id)
+                ->count();
         $lb_proses = DB::table('laporan_bencanas')
-                ->where('status', 'proses')->count();
+                ->where('status', 'proses')
+                ->where('petugas_id', Auth::user()->id)
+                ->count();
         $lb_tolak = DB::table('laporan_bencanas')
+                ->where('petugas_id', Auth::user()->id)
                 ->where('status', 'tolak')->count();
         return view('petugas.home', compact('lb_total', 'lb_selesai', 'lb_proses', 'lb_tolak'));
     }
@@ -60,8 +66,10 @@ class RoleViewController extends Controller
     public function petugasNotifikasiShow($id)
     {
         $lpb = LaporanBencana::findorfail($id);
-        if ($lpb->status != true) {
-            $lpb->update([ 'read' => true ]);
+        if ($lpb->status !== true) {
+            $lpb->update([ 
+                'read' => true,
+            ]);
         }
 
         return view('petugas.notifikasi-show', compact('lpb'));
@@ -70,16 +78,20 @@ class RoleViewController extends Controller
     public function petugasTangani($id)
     {
         $lpb = LaporanBencana::findorfail($id);
-        if ($lpb->status != true) {
-            $lpb->update([
+        if ($lpb->status !== true) {
+            $lpb_data = [
                 'status' => 'proses',
                 'read' => true,
-            ]);
+                'petugas_id' => Auth::user()->id,
+            ];
         } else {
-            $lpb->update([
+            $lpb_data = [
                 'status' => 'proses',
-            ]);
+                'petugas_id' => Auth::user()->id,
+            ];
         }
+
+        $lpb->update($lpb_data);
 
         Alert::success('Success', 'Tangani Laporan. Silahkan cek dibagian menu Verifikasi Bencana');
 
@@ -89,16 +101,20 @@ class RoleViewController extends Controller
     public function petugasTolak($id)
     {
         $lpb = LaporanBencana::findorfail($id);
-        if ($lpb->status != true) {
-            $lpb->update([
+        if ($lpb->status !== true) {
+            $lpb_data = [
                 'status' => 'tolak',
                 'read' => true,
-            ]);
+                'petugas_id' => Auth::user()->id,
+            ];
         } else {
-            $lpb->update([
+            $lpb_data = [
                 'status' => 'tolak',
-            ]);
+                'petugas_id' => Auth::user()->id,
+            ];
         }
+
+        $lpb->update($lpb_data);
 
         Alert::success('Success', 'Tolak Laporan.');
 
@@ -109,6 +125,7 @@ class RoleViewController extends Controller
     {
         $laporan_bencana = DB::table('laporan_bencanas')
                             ->where('status', 'proses')
+                            ->where('petugas_id', Auth::user()->id)
                             ->orderBy('id', 'desc')
                             ->get();
         return view('petugas.verifikasi-bencana', compact('laporan_bencana'));
@@ -146,6 +163,7 @@ class RoleViewController extends Controller
     {
         $laporan_bencana = DB::table('laporan_bencanas')
                             ->where('status', 'selesai')
+                            ->where('petugas_id', Auth::user()->id)
                             ->orderBy('id', 'desc')
                             ->get();
         return view('petugas.riwayat-penanganan', compact('laporan_bencana'));
