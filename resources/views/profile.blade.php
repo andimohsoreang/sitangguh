@@ -3,7 +3,7 @@
 @include('sweetalert::alert')
 <div class="d-flex align-items-center gap-4 mb-3">
     <div>
-        <a href="{{ back() }}" class="btn icon btn-secondary"><i data-feather="arrow-left"></i></a>
+        <a href="{{ url()->previous() }}" class="btn icon btn-secondary"><i data-feather="arrow-left"></i></a>
     </div>
     <div>
         <h3 class="m-0">Profile</h3>
@@ -30,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="email">Nama</label>
+                            <label for="email">Email</label>
                             <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" class="form-control @error('email') is-invalid @enderror">
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>

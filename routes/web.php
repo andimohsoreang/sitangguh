@@ -30,7 +30,11 @@ Auth::routes();
 Route::group(['middleware' => ['auth','role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [RoleViewController::class, 'admin']);
     Route::get('/dashboard', [RoleViewController::class, 'admin'])->name('admin.index');
-    Route::get('/notifikasi', [RoleViewController::class, 'adminNotifikasi'])->name('admin.notifikasi');
+    Route::get('/laporan/tunggu', [RoleViewController::class, 'adminlaporan'])->name('laporan.tunggu');
+    Route::get('/laporan/ditolak', [RoleViewController::class, 'adminlaporan'])->name('laporan.tolak');
+    Route::get('/laporan/proses', [RoleViewController::class, 'adminlaporan'])->name('laporan.proses');
+    Route::get('/laporan/selesai', [RoleViewController::class, 'adminlaporan'])->name('laporan.selesai');
+    Route::get('/laporan/show/{id}', [LaporanBencanaController::class, 'show'])->name('laporan.show');
     Route::get('/rekap', [RoleViewController::class, 'adminRekap'])->name('admin.rekap');
 
     Route::get('/petugas', [PetugasController::class, 'index'])->name('admin.petugas');
@@ -79,6 +83,7 @@ Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], functio
     Route::put('/laporanbencana/update/{id}', [LaporanBencanaController::class, 'update'])->name('user.update.laporanbencana');
     Route::delete('/laporanbencana/destroy/{id}', [LaporanBencanaController::class, 'destroy'])->name('user.destroy.laporanbencana');
 
+    Route::get('/laporanterkirim/detail/{id}', [LaporanBencanaController::class, 'show'])->name('user.show.laporanterkirim');
 
     Route::get('/laporanterkirim', [LaporanTerkirimController::class, 'index'])->name('user.laporanterkirim');
 });

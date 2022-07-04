@@ -30,12 +30,22 @@
                             <tr>
                                 <td><p class="m-0 fw-bold small">Kerusakan</p></td>
                                 <td>&nbsp;:&nbsp;</td>
-                                <td><p class="m-0 small"></p></td>
+                                <td><p class="m-0 small">{{ $lb->kerusakan }}</p></td>
                             </tr>
                             <tr>
                                 <td><p class="m-0 fw-bold small">Jumlah Kerugian</p></td>
                                 <td>&nbsp;:&nbsp;</td>
-                                <td><p class="m-0 small"></p></td>
+                                <td><p class="m-0 small">{{ $lb->kerugian }}</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="m-0 fw-bold small">Petugas</p></td>
+                                <td>&nbsp;:&nbsp;</td>
+                                <td><p class="m-0 small">{{ $lb->petugas->name }}</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="m-0 fw-bold small">Pelapor</p></td>
+                                <td>&nbsp;:&nbsp;</td>
+                                <td><p class="m-0 small">{{ $lb->user->name }}</p></td>
                             </tr>
                         </table>
                     </div>

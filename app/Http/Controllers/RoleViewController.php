@@ -16,12 +16,46 @@ class RoleViewController extends Controller
     // Admin
     public function admin()
     {
-        return view('admin.home');
+        $lpb_total = LaporanBencana::count();
+        $lpb_tunggu = LaporanBencana::where('status', 'tunggu')->count();
+        $lpb_tolak = LaporanBencana::where('status', 'tolak')->count();
+        $lpb_proses = LaporanBencana::where('status', 'proses')->count();
+        $lpb_selesai = LaporanBencana::where('status', 'selesai')->count();
+        $lpb_petugas = DB::table('users')->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                            ->where('roles.name', '=', 'petugas')
+                            ->count();
+        $lpb_masyarakat = DB::table('users')->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                            ->where('roles.name', '=', 'user')
+                            ->count();
+        return view('admin.home', compact('lpb_total', 'lpb_tunggu', 'lpb_tolak', 'lpb_proses', 'lpb_selesai', 'lpb_petugas', 'lpb_masyarakat'));
     }
 
-    public function adminNotifikasi()
+    public function adminlaporan()
     {
-        return view('admin.notifikasi');
+        if (request()->routeIs('laporan.tunggu')) {
+            $lpb = LaporanBencana::where('status', 'tunggu')
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        }
+        if (request()->routeIs('laporan.tolak')) {
+            $lpb = LaporanBencana::where('status', 'tolak')
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        }
+        if (request()->routeIs('laporan.proses')) {
+            $lpb = LaporanBencana::where('status', 'proses')
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        }
+        if (request()->routeIs('laporan.selesai')) {
+            $lpb = LaporanBencana::where('status', 'selesai')
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        }
+
+        return view('admin.laporan', compact('lpb'));
     }
 
     public function adminPetugas()
@@ -123,8 +157,7 @@ class RoleViewController extends Controller
 
     public function petugasVerifikasi()
     {
-        $laporan_bencana = DB::table('laporan_bencanas')
-                            ->where('status', 'proses')
+        $laporan_bencana = LaporanBencana::where('status', 'proses')
                             ->where('petugas_id', Auth::user()->id)
                             ->orderBy('id', 'desc')
                             ->get();
@@ -161,8 +194,7 @@ class RoleViewController extends Controller
 
     public function petugasRiwayat()
     {
-        $laporan_bencana = DB::table('laporan_bencanas')
-                            ->where('status', 'selesai')
+        $laporan_bencana = LaporanBencana::where('status', 'selesai')
                             ->where('petugas_id', Auth::user()->id)
                             ->orderBy('id', 'desc')
                             ->get();

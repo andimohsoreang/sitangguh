@@ -47,7 +47,7 @@
                                 <span>Selesai</span>
                             </div>
                             <div>
-                                <a href="" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
+                                <a href="{{ route('user.show.laporanterkirim', $lb->id) }}" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
                             </div>
                         </div>
                         

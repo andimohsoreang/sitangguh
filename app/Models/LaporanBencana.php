@@ -27,6 +27,11 @@ class LaporanBencana extends Model
 
     public function user()
     {
+        return $this->belongsTo(User::class);
+    }
+
+    public function petugas()
+    {
         return $this->belongsTo(User::class, 'petugas_id', 'id');
     }
 

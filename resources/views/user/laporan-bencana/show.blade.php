@@ -2,7 +2,7 @@
 @section('section')
 <div class="d-flex align-items-center gap-4 mb-3">
     <div>
-        <a href="{{ route('user.laporanbencana') }}" class="btn icon btn-secondary"><i data-feather="arrow-left"></i></a>
+        <a href="{{ url()->previous() }}" class="btn icon btn-secondary"><i data-feather="arrow-left"></i></a>
     </div>
     <div>
         <h3 class="m-0">Laporan Bencana</h3>
@@ -49,10 +49,15 @@
                             <span class="badge bg-secondary">Tunggu</span>
                         @elseif ($lp->status == "proses")
                             <span class="badge bg-info">Proses</span>
+                        @elseif ($lp->status == "tolak")
+                            <span class="badge bg-danger">Ditolak</span>
                         @else
                             <span class="badge bg-success">Selesai</span>
                         @endif
-                        <span class="badge bg- badge-pill"></span>
+                    </div>
+                    <div class="form-group">
+                        <h5>Petugas</h5>
+                        <p class="m-0">{{ $lp->petugas->name }}</p>
                     </div>
                 </div>
             </div>
