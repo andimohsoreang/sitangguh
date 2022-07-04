@@ -18,8 +18,7 @@ class LaporanBencanaController extends Controller
      */
     public function index()
     {
-        $laporan_bencana = DB::table('laporan_bencanas')
-                            ->where('user_id', Auth::user()->id)
+        $laporan_bencana = LaporanBencana::where('user_id', Auth::user()->id)
                             ->where('status', '!=', 'selesai')->get();
         return view('user.laporan-bencana.home', compact('laporan_bencana'));
     }

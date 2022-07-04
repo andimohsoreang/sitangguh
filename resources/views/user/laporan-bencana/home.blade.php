@@ -22,6 +22,7 @@
                         <th>Lokasi</th>
                         <th>Status</th>
                         <th>Dilihat</th>
+                        <th>Ditangani</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -41,6 +42,8 @@
                                     <span class="badge bg-secondary">Tunggu</span>
                                 @elseif ($lp->status == "proses")
                                     <span class="badge bg-info">Proses</span>
+                                @elseif ($lp->status == "tolak")
+                                    <span class="badge bg-danger">Ditolak</span>
                                 @else
                                     <span class="badge bg-success">Selesai</span>
                                 @endif
@@ -52,6 +55,7 @@
                                     <span class="badge bg-success badge-pill badge-round px-0 py-1"><i data-feather="circle"></i></span>
                                 @endif
                             </td>
+                            <td>{{ $lp->user->name }}</td>
                             <td>
                                 <form action="{{ route('user.destroy.laporanbencana', $lp->id) }}" method="post">
                                     @csrf
