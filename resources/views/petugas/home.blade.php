@@ -31,7 +31,6 @@
                         <div class='px-3 d-flex align-items-center justify-content-between'>
                             <div>
                                 <h3 class='card-title m-0 mb-1 text-white'>Laporan di Tolak</h3>
-                                <a href="{{ route('petugas.verifikasi') }}" class="text-white small"><span data-feather="chevron-right"></span> Selengkapnya</a>
                             </div>
                             <div class="card-right d-flex align-items-center">
                                 <h1 class="m-0 text-white" style="font-size: 80px;">{{ $lb_tolak }}</h1>

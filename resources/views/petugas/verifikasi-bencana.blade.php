@@ -48,7 +48,7 @@
                             <span>Proses</span>
                         </div>
                         <div class="d-flex gap-2">
-                            <a href="" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
+                            <a href="{{ route('petugas.show.verifikasi', $lb->id) }}" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
                             <a href="{{ route('petugas.verifikasiform', $lb->id) }}" class="btn btn-sm icon btn-success"><i data-feather="edit-3"></i> Verifikasi Laporan</a>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h1 class="mb-2  badge bg-danger badge-pill badge-round py-1 px-0"><i data-feather="alert-circle"></i></h1>
-                    <h5 class="m-0">Daftar laporan bencana tidak ditemukan.</h4>
+                    <h5 class="m-0">Daftar laporan bencana yang akan diverifikasi tidak ditemukan.</h4>
                 </div>
             </div>
         </div>

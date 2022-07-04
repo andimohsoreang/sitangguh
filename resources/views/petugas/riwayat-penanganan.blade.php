@@ -47,7 +47,7 @@
                             <span>Selesai</span>
                         </div>
                         <div class="d-flex gap-2">
-                            <a href="" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
+                            <a href="{{ route('petugas.show.riwayat', $lb->id) }}" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h1 class="mb-2  badge bg-danger badge-pill badge-round py-1 px-0"><i data-feather="alert-circle"></i></h1>
-                    <h5 class="m-0">Daftar laporan bencana tidak ditemukan.</h4>
+                    <h5 class="m-0">Daftar laporan bencana yang sudah ditangani tidak ditemukan.</h4>
                 </div>
             </div>
         </div>
