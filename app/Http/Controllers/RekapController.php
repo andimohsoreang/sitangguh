@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LaporanBencana;
+// use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
+use PDF;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RekapController extends Controller
 {
@@ -16,69 +20,44 @@ class RekapController extends Controller
         return view('admin.rekap');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function semua()
     {
-        //
+        $laporan_bencana = LaporanBencana::orderBy('created_at', 'desc')->get();
+        $pdf = PDF::loadView('admin.rekap.semua', compact('laporan_bencana'))->setPaper('a4', 'landscape');
+        $date = date('Y-m-d');
+        $time = date('H-i-s');
+        $namefile = 'Rekap_Semua_Laporan_'.$date.'_'.$time.'.pdf';
+        return $pdf->download($namefile);
+        // return view('admin.rekap.semua', compact('laporan_bencana'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function perstatus(Request $request)
     {
-        //
+        $status = $request->status;
+        if (!empty($status)) {
+            $laporan_bencana = LaporanBencana::where('status', $status)
+                                            ->orderBy('created_at', 'desc')
+                                            ->get();
+            $pdf = PDF::loadView('admin.rekap.semua', compact('laporan_bencana'))->setPaper('a4', 'landscape');
+            $date = date('Y-m-d');
+            $time = date('H-i-s');
+            if ($status == "selesai") {
+                $sts = "selesai";
+            } else if ($status == "proses") {
+                $sts = "proses";
+            } else if ($status == "tolak") {
+                $sts = "tolak";
+            }
+            $namefile = 'Rekap_Semua_Laporan_'.$sts.'_'.$date.'_'.$time.'.pdf';
+            return $pdf->download($namefile);
+        } else {
+            Alert::error('Failed', 'Silahkan pilih status terlebih dahulu!');
+            return redirect()->route('admin.rekap');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function perbulan($bulan)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        
     }
 }

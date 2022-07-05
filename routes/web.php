@@ -30,12 +30,18 @@ Auth::routes();
 Route::group(['middleware' => ['auth','role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [RoleViewController::class, 'admin']);
     Route::get('/dashboard', [RoleViewController::class, 'admin'])->name('admin.index');
+
     Route::get('/laporan/tunggu', [RoleViewController::class, 'adminlaporan'])->name('laporan.tunggu');
     Route::get('/laporan/ditolak', [RoleViewController::class, 'adminlaporan'])->name('laporan.tolak');
     Route::get('/laporan/proses', [RoleViewController::class, 'adminlaporan'])->name('laporan.proses');
     Route::get('/laporan/selesai', [RoleViewController::class, 'adminlaporan'])->name('laporan.selesai');
     Route::get('/laporan/show/{id}', [LaporanBencanaController::class, 'show'])->name('laporan.show');
+
     Route::get('/rekap', [RoleViewController::class, 'adminRekap'])->name('admin.rekap');
+    Route::get('/rekap/all', [RekapController::class, 'semua'])->name('rekap.semua');
+    Route::post('/rekap/status', [RekapController::class, 'perstatus'])->name('rekap.perstatus');
+    Route::get('/rekap/bulan/{bulan}', [RekapController::class, 'perbulan'])->name('rekap.perbulan');
+
 
     Route::get('/petugas', [PetugasController::class, 'index'])->name('admin.petugas');
     Route::get('/petugas/create', [PetugasController::class, 'create'])->name('admin.create.petugas');
