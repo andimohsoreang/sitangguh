@@ -106,16 +106,16 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item {{ request()->routeIs('admin.rekap') ? 'active' : '' }}">
-                    <a href="{{ route('admin.rekap') }}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
-                        <span>Rekap Laporan</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ request()->routeIs('admin.petugas') ? 'active' : '' }}">
                     <a href="{{ route('admin.petugas') }}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
+                        <i data-feather="users" width="20"></i>
                         <span>Daftar Petugas</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('admin.rekap') ? 'active' : '' }}">
+                    <a href="{{ route('admin.rekap') }}" class='sidebar-link'>
+                        <i data-feather="printer" width="20"></i>
+                        <span>Rekap Laporan</span>
                     </a>
                 </li>
                 @endrole
