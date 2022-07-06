@@ -55,7 +55,7 @@
                                     <span class="badge bg-success badge-pill badge-round px-0 py-1"><i data-feather="circle"></i></span>
                                 @endif
                             </td>
-                            <td>{{ $lp->petugas->name }}</td>
+                            <td>{{ $lp->petugas->name ?? '-' }}</td>
                             <td>
                                 <form action="{{ route('user.destroy.laporanbencana', $lp->id) }}" method="post">
                                     @csrf
