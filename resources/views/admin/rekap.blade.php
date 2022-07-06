@@ -9,24 +9,24 @@
 </div>
 <div class="section">
     <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6">
             <div class="card bg-primary">
                 <div class="card-body text-center">
                     <span class="badge bg-white text-primary badge-pill badge-round px-0 py-1"><i data-feather="download"></i></span>
                     <h5 class="m-0 mt-2 mb-3 text-white">
-                        Download Data <br>
+                        Download Data
                         Laporan Bencana
                     </h5>
                     <a href="{{ route('rekap.semua') }}" class="btn btn-dark btn-block">Download</a>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6">
             <div class="card bg-info">
                 <div class="card-body text-center">
                     <span class="badge bg-white text-info badge-pill badge-round px-0 py-1"><i data-feather="download"></i></span>
                     <h5 class="m-0 mt-2 mb-3 text-white">
-                        Download Data <br>
+                        Download Data
                         Laporan Bencana Berdasarkan Status
                     </h5>
                     <form action="{{ route('rekap.perstatus') }}" method="post">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4">
+        {{-- <div class="col-12 col-md-4">
             <a href="">
                 <div class="card bg-success">
                     <div class="card-body text-center">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection
