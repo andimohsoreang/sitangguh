@@ -23,6 +23,9 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control">
+                            @error('email') 
+                                <div class="alert alert-danger ">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>

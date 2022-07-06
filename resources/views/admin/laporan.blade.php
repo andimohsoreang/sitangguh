@@ -62,7 +62,7 @@
                                     <span class="badge bg-success badge-pill badge-round px-0 py-1"><i data-feather="circle"></i></span>
                                 @endif
                             </td>
-                            <td>{{ $lp->petugas->name }}</td>
+                            <td>{{ $lp->petugas->name ?? '-' }}</td>
                             <td>
                                 <a href="{{ route('laporan.show', $lp->id) }}" class="btn btn-sm icon btn-secondary">
                                     <i data-feather="eye"></i> Detail

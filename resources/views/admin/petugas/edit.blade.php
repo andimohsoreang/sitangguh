@@ -5,7 +5,7 @@
         <a href="{{ route('admin.petugas') }}" class="btn icon btn-secondary"><i data-feather="arrow-left"></i></a>
     </div>
     <div>
-        <h3 class="m-0">Tambah Petugas</h3>
+        <h3 class="m-0">Edit Petugas</h3>
         <p class="text-subtitle text- m-0">Form tambah petugas.</p>
     </div>
 </div>
@@ -24,6 +24,9 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control" value="{{ $petugas->email }}">
+                            @error('email') 
+                                <div class="alert alert-danger ">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>

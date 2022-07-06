@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <h5>Petugas</h5>
-                        <p class="m-0">{{ $lp->petugas->name }}</p>
+                        <p class="m-0">{{ $lp->petugas->name ?? '-' }}</p>
                     </div>
                 </div>
             </div>
