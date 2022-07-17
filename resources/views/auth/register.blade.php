@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="text-center mb-2">
                     <img src="{{ asset('be/assets/images/bpbdlogo.png') }}" height="100" class='mb-3'>
-                    <h2 class="mb-2 text-new-warning fw-bold">SITANGGUH</h2>
+                    <h2 class="mb-2 text-new-warning fw-bold">SI-LAPBEN</h2>
                     <h3>Registrasi</h3>
                     <p>Silahkan isi formulir registrasi.</p>
                 </div>

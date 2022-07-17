@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <h5>Petugas</h5>
-                        <p class="m-0">{{ $lpb->petugas->name }}</p>
+                        <p class="m-0">{{ $lpb->petugas->name ?? '' }}</p>
                     </div>
                     <div class="form-group">
                         <h5>Pelapor</h5>
