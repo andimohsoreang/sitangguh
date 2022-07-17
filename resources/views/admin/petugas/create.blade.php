@@ -30,6 +30,9 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" class="form-control">
+                            @error('password')
+                                <div class="alert alert-danger ">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="form-group mb-0">
                             <button type="reset" class="btn btn-sm btn-light">Reset</button>
