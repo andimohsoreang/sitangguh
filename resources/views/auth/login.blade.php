@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="text-center mb-2">
                     <img src="{{ asset('be/assets/images/bpbdlogo.png') }}" height="100" class='mb-3'>
-                    <h2 class="mb-2 text-danger fw-bold">SITANGGUH</h2>
+                    <h2 class="mb-2 text-new-warning fw-bold">SITANGGUH</h2>
                     <h3>Login</h3>
                 </div>
                 <form method="POST" action="{{ route('login') }}">
@@ -38,9 +38,9 @@
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between">
-                        <a class="color-danger" href="{{ route('register') }}">Belum punya akun? Register</a>
+                        <a class="text-new-dark" href="{{ route('register') }}">Belum punya akun? Register</a>
                         <div class="clearfix">
-                            <button type="submit" class="btn btn-danger float-end">Login</button>
+                            <button type="submit" class="btn btn-danger float-end" style="background-color: #ff990b;border-color: #ff990b;">Login</button>
                         </div>
                     </div>
                 </form>

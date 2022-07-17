@@ -59,6 +59,14 @@
                         <h5>Petugas</h5>
                         <p class="m-0">{{ $lp->petugas->name ?? '-' }}</p>
                     </div>
+                    <div class="form-group">
+                        <h5>Kerusakan</h5>
+                        <p class="m-0">{{ $lp->kerusakan ?? '-' }}</p>
+                    </div>
+                    <div class="form-group">
+                        <h5>Kerugian</h5>
+                        <p class="m-0">{{ $lp->kerugian ?? '-' }}</p>
+                    </div>
                 </div>
             </div>
         </div>
