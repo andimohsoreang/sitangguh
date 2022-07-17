@@ -46,12 +46,22 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="lokasi">Lokasi Bencana</label>
-                            <input type="text" id="lokasi" name="lokasi" value="{{ $lp->url_gmaps }}" class="form-control @error('lokasi') is-invalid @enderror">
-                            <span class="small d-flex aling-items-center gap-1 mt-1"><i data-feather="info" width="14"></i> Dari google maps</span>
-                            @error('lokasi')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            <div class="row align-items-center g-1">
+                                <div class="col-12 col-md-10">
+                                    <label for="lokasi">Lokasi Bencana</label>
+                                    <input type="text" id="lokasi" name="lokasi" value="{{ $lp->url_gmaps }}" class="form-control @error('lokasi') is-invalid @enderror">
+                                    <span class="small d-flex aling-items-center gap-1 mt-1"><i data-feather="info" width="14"></i> Dari google maps</span>
+                                    @error('lokasi')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <div class="d-flex gap-1">
+                                        <a href="{{ $lp->url_gmaps }}" target="_blank" class="btn icon btn-primary btn-block"><i data-feather="map-pin"></i></a>
+                                        <a href="https://www.google.co.id/maps/" target="_blank" class="btn icon btn-primary btn-block"><i data-feather="search"></i></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="bukti">Bukti</label>

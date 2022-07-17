@@ -38,12 +38,19 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="lokasi">Lokasi Bencana</label>
-                            <input type="text" id="lokasi" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror">
-                            <span class="small d-flex aling-items-center gap-1 mt-1"><i data-feather="info" width="14"></i> Dari google maps</span>
-                            @error('lokasi')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-9">
+                                    <label for="lokasi">Lokasi Bencana</label>
+                                    <input type="text" id="lokasi" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror">
+                                    <span class="small d-flex aling-items-center gap-1 mt-1"><i data-feather="info" width="14"></i> Dari google maps</span>
+                                    @error('lokasi')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <a href="https://www.google.co.id/maps/" target="_blank" class="btn icon btn-primary btn-block"><i data-feather="search"></i> Cari Lokasi</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="bukti">Bukti</label>
