@@ -21,6 +21,7 @@ class LaporanBencana extends Model
         'kerusakan',
         'kerugian',
         'petugas_id',
+        'darurat',
     ];
 
     protected $with = ['user'];

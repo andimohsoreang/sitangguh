@@ -30,7 +30,11 @@
                     @foreach ($laporan_bencana as $lp)                        
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($lp->kronologi), 60, '...') }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($lp->kronologi), 60, '...') }} 
+                                @if ($lp->darurat == 1)
+                                    &nbsp;&nbsp;<span class="badge bg-danger">Darurat</span>
+                                @endif
+                            </td>
                             <td>
                                 <div class="image-link">
                                     <a href="{{ asset($lp->bukti) }}" class="btn btn-sm btn-primary" target="_blank"><i data-feather="image"></i></a>

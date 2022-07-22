@@ -20,13 +20,7 @@
         </div>
         <div class="col-12 col-lg-6">            
             <div class="card">
-                <div class="card-body
-                @if ($lpb->read == 0)
-                    border-danger
-                @else
-                    border-success
-                @endif
-                border-top border-5">
+                <div class="card-body">
                     <div class="form-group">
                         <h5>Kronologi</h5>
                         <p class="m-0">{{ $lpb->kronologi }}</p>
@@ -49,6 +43,8 @@
                             <span class="badge bg-secondary">Tunggu</span>
                         @elseif ($lpb->status == "proses")
                             <span class="badge bg-info">Proses</span>
+                        @elseif ($lpb->status == "tolak")
+                            <span class="badge bg-danger">Ditolak</span>
                         @else
                             <span class="badge bg-success">Selesai</span>
                         @endif
@@ -62,6 +58,13 @@
                         <p class="m-0">{{ $lpb->user->name }}</p>
                     </div>
                 </div>
+                @if ($lpb->darurat == 1)    
+                <div class="card-footer p-0">
+                    <div class="d-block bg-danger text-center py-2">
+                        <h6 class="m-0 text-white">Darurat</h6>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

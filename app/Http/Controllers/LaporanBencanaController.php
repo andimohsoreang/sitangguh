@@ -19,7 +19,10 @@ class LaporanBencanaController extends Controller
     public function index()
     {
         $laporan_bencana = LaporanBencana::where('user_id', Auth::user()->id)
-                            ->where('status', '!=', 'selesai')->get();
+                            ->where('status', '!=', 'selesai')
+                            ->orderBy('id', 'desc')
+                            ->get();
+        
         return view('user.laporan-bencana.home', compact('laporan_bencana'));
     }
 
@@ -43,7 +46,7 @@ class LaporanBencanaController extends Controller
     {
         $request->validate([
             'tanggal' => ['required'],
-            'waktu' => ['required'],
+            'waktu' => ['required', 'date_format:H:i'],
             'kronologi' => ['required'],
             'lokasi' => ['required'],
             'bukti' => ['required', 'image', 'mimes:png,jpg,jpeg'],
@@ -54,6 +57,12 @@ class LaporanBencanaController extends Controller
         $bukti = $request->bukti;
         $new_bukti = time().$bukti->getClientOriginalName();
 
+        if ($request->has('darurat')) {
+            $darurat = true;
+        } else {
+            $darurat = false;
+        }
+
         $lb = LaporanBencana::create([
             'user_id' => Auth::user()->id,
             'kronologi' => $request->kronologi,
@@ -63,6 +72,7 @@ class LaporanBencanaController extends Controller
             'read' => false,
             'tanggal' => $request->tanggal,
             'waktu' => $request->waktu,
+            'darurat' => $darurat,
         ]);
 
         if ($lb)

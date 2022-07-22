@@ -29,7 +29,11 @@ class RoleViewController extends Controller
                             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
                             ->where('roles.name', '=', 'user')
                             ->count();
-        return view('admin.home', compact('lpb_total', 'lpb_tunggu', 'lpb_tolak', 'lpb_proses', 'lpb_selesai', 'lpb_petugas', 'lpb_masyarakat'));
+
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+        $today = \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y');
+        return view('admin.home', compact('lpb_total', 'lpb_tunggu', 'lpb_tolak', 'lpb_proses', 'lpb_selesai', 'lpb_petugas', 'lpb_masyarakat', 'today'));
     }
 
     public function adminlaporan()
@@ -85,7 +89,11 @@ class RoleViewController extends Controller
         $lb_tolak = DB::table('laporan_bencanas')
                 ->where('petugas_id', Auth::user()->id)
                 ->where('status', 'tolak')->count();
-        return view('petugas.home', compact('lb_total', 'lb_selesai', 'lb_proses', 'lb_tolak'));
+
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+        $today = \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y');
+        return view('petugas.home', compact('lb_total', 'lb_selesai', 'lb_proses', 'lb_tolak', 'today'));
     }
 
     public function petugasNotifikasi()
@@ -194,7 +202,7 @@ class RoleViewController extends Controller
 
     public function petugasRiwayat()
     {
-        $laporan_bencana = LaporanBencana::where('status', 'selesai')
+        $laporan_bencana = LaporanBencana::where('status', 'selesai')->orWhere('status', 'tolak')
                             ->where('petugas_id', Auth::user()->id)
                             ->orderBy('id', 'desc')
                             ->get();
@@ -214,7 +222,17 @@ class RoleViewController extends Controller
         $lb_tolak = DB::table('laporan_bencanas')
                         ->where('user_id', Auth::user()->id)
                         ->where('status', 'tolak')->count();
-        return view('user.home', compact('lb_total','lb_selesai','lb_tolak'));
+        $lb_tunggu = DB::table('laporan_bencanas')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('status', 'tunggu')->count();
+        $lb_proses = DB::table('laporan_bencanas')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('status', 'proses')->count();
+
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+        $today = \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y');
+        return view('user.home', compact('lb_total','lb_selesai','lb_tolak','lb_tunggu','lb_proses','today'));
     }
 
     public function userProfile()

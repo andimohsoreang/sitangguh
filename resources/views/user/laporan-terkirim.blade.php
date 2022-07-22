@@ -42,9 +42,17 @@
                     </div>
                     <div class="card-footer p-3 border-top">
                         <div class="d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-1">
-                                <span class="badge bg-success badge-pill badge-round px-0 py-1"><i data-feather="check-circle"></i></span>
-                                <span>Selesai</span>
+                            <div class="d-flex gap-2">
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-success badge-pill badge-round px-0 py-1"><i data-feather="check-circle"></i></span>
+                                    <span>Selesai</span>
+                                </div>
+                                @if ($lb->darurat == 1)                                
+                                    <div class="d-flex align-items-center gap-1">
+                                        <span class="badge bg-danger badge-pill badge-round px-0 py-1"><i data-feather="alert-triangle"></i></span>
+                                        <span>Darurat</span>
+                                    </div>
+                                @endif
                             </div>
                             <div>
                                 <a href="{{ route('user.show.laporanterkirim', $lb->id) }}" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>

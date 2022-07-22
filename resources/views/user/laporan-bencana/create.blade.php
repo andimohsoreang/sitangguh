@@ -59,6 +59,14 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <div class='form-check'>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="form-check-input form-check-danger form-check-glow" name="darurat" id="darurat">
+                                    <label class="form-check-label" for="darurat">Darurat ?</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group mt-3 mb-0">
                             <button type="reset" class="btn btn-sm btn-light">Reset</button>
                             <button type="submit" class="btn btn-sm btn-success">Simpan</button>

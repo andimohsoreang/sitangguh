@@ -12,7 +12,7 @@
     <div class="row">
         @foreach ($laporan_bencana as $lb)    
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="card">
+            <div class="card @if($lb->darurat == 1) border border-danger @endif">
                 <div class="card-body p-0">
                     <img src="{{ asset($lb->bukti) }}" alt="" style="object-fit: cover;object-position: center;width: 100%;height: 200px;">
                     <div class="p-3">
@@ -43,9 +43,17 @@
                 </div>
                 <div class="card-footer p-3 border-top">
                     <div class="d-flex align-items-center flex-column flex-wrap gap-3">
-                        <div class="d-flex align-items-center gap-1">
-                            <span class="badge bg-secondary badge-pill badge-round px-0 py-1"><i data-feather="clock"></i></span>
-                            <span>Tunggu</span>
+                        <div class="d-flex gap-2">
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="badge bg-secondary badge-pill badge-round px-0 py-1"><i data-feather="clock"></i></span>
+                                <span>Tunggu</span>
+                            </div>
+                            @if ($lb->darurat == 1)                                
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-danger badge-pill badge-round px-0 py-1"><i data-feather="alert-triangle"></i></span>
+                                    <span>Darurat</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="d-flex gap-2">
                             <a href="{{ route('petugas.show.notifikasi', $lb->id) }}" class="btn btn-sm icon btn-primary"><i data-feather="info"></i> Detail Laporan</a>

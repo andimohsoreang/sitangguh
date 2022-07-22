@@ -20,13 +20,7 @@
         </div>
         <div class="col-12 col-lg-6">            
             <div class="card">
-                <div class="card-body
-                @if ($lp->read == 0)
-                    border-danger
-                @else
-                    border-success
-                @endif
-                border-top border-5">
+                <div class="card-body pb-3">
                     <div class="form-group">
                         <h5>Kronologi</h5>
                         <p class="m-0">{{ $lp->kronologi }}</p>
@@ -68,6 +62,13 @@
                         <p class="m-0">{{ $lp->kerugian ?? '-' }}</p>
                     </div>
                 </div>
+                @if ($lp->darurat == 1)    
+                <div class="card-footer p-0">
+                    <div class="d-block bg-danger text-center py-2">
+                        <h6 class="m-0 text-white">Darurat</h6>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
