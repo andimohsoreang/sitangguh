@@ -27,6 +27,9 @@
         <h3>SITANGGUH</h3>
         <h4>REKAP LAPORAN BENCANA</h4>
     </div>
+    <div style="margin-bottom: 10px">
+        <h4 style="margin: 0;">Nama Pelapor : {{ Auth::user()->name }}</h4>
+    </div>
     <table width="100%">
         <tr>
             <th>No</th>
@@ -53,5 +56,32 @@
         </tr>
         @endforeach
     </table>
+
+    <table width="25%" style="margin-top: 10px;">
+        <tr>
+            <td>Laporan Belum Diproses</td>
+            <td align="center">{{ $total_tunggu }}</td>
+        </tr>
+        <tr>
+            <td>Laporan Diproses</td>
+            <td align="center">{{ $total_proses }}</td>
+        </tr>
+        <tr>
+            <td>Laporan Ditolak</td>
+            <td align="center">{{ $total_tolak }}</td>
+        </tr>
+        <tr>
+            <td>Laporan Selesai</td>
+            <td align="center">{{ $total_selesai }}</td>
+        </tr>
+        <tr>
+            <td><b>Total Laporan</b></td>
+            <td width="20%" align="center"><b>{{ $total_laporan }}</b></td>
+        </tr>
+    </table>
+
+    <script>
+        print();
+    </script>
 </body>
 </html>

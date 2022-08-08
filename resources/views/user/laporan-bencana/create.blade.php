@@ -18,14 +18,14 @@
                         @csrf
                         <div class="form-group">
                             <label for="tanggal">Tanggal Kejadian</label>
-                            <input type="date" id="tanggal" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror">
+                            <input type="date" id="tanggal" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror"  value="{{  date('Y-m-d') }}" readonly>
                             @error('tanggal')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="waktukejadian">Waktu Kejadian</label>
-                            <input type="text" id="waktukejadian" name="waktu" class="form-control @error('waktu') is-invalid @enderror">
+                            <input type="text" id="waktukejadian" name="waktu" class="form-control @error('waktu') is-invalid @enderror" readonly>
                             @error('waktu')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -84,6 +84,7 @@
     const tgl = new Date();
     const jam = tgl.getHours();
     const menit = tgl.getMinutes();
-    $('#waktukejadian').attr('placeholder', `${jam}:${menit}`);
+    const detik = tgl.getSeconds();
+    $('#waktukejadian').attr('value', `${jam}:${menit}:${detik}`);
 </script>
 @endsection

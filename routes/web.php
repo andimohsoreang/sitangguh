@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth','role:user'], 'prefix' => 'user'], functio
     Route::get('/laporanterkirim/detail/{id}', [LaporanBencanaController::class, 'show'])->name('user.show.laporanterkirim');
 
     Route::get('/laporanterkirim', [LaporanTerkirimController::class, 'index'])->name('user.laporanterkirim');
+    Route::get('/rekaplaporan', [RoleViewController::class, 'userrekap'])->name('user.rekaplaporan');
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

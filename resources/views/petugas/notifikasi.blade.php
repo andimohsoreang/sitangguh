@@ -62,13 +62,52 @@
                                 @method('put')
                                 <button type="submit" class="btn btn-sm icon btn-success"><i data-feather="check-circle"></i> Tangani Laporan</button>
                             </form>
-                            <form action="{{ route('petugas.tolak', $lb->id) }}" method="post" onsubmit="return confirm('Konfirmasi untuk tolak laporan.')">
+                            <button type="button" class="btn btn-sm icon btn-danger" data-bs-toggle="modal" data-bs-target="#modalTolak{{ $lb->id }}"><i data-feather="x-circle"></i> Tolak Laporan</button>
+                            {{-- <form action="{{ route('petugas.tolak', $lb->id) }}" method="post" onsubmit="return confirm('Konfirmasi untuk tolak laporan.')">
                                 @csrf
                                 @method('put')
                                 <button type="submit" class="btn btn-sm icon btn-danger"><i data-feather="x-circle"></i> Tolak Laporan</button>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalTolak{{ $lb->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Form Penolakan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('petugas.tolak', $lb->id) }}" method="post" onsubmit="return confirm('Konfirmasi untuk tolak laporan.')">
+                        @csrf
+                        @method('put')
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="fw-bold">Kronologi</label>
+                                <p>{{ $lb->kronologi }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="fw-bold">Tanggal</label>
+                                <p>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $lb->tanggal)->isoFormat('D MMMM Y')  }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="fw-bold">Kejadian</label>
+                                <p>{{ $lb->waktu }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="fw-bold">Alasan Laporan Ditolak</label>
+                                <textarea name="alasan" class="form-control" rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Kirim Penolakan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

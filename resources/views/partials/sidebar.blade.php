@@ -3,7 +3,7 @@
         <div class="sidebar-header">
             <div class="d-flex align-items-center gap-2">
                 <img src="{{ asset('be/assets/images/bpbdlogo.png') }}">
-                <h3 class="m-0">SITANGGUH</h3>
+                <h3 class="m-0">SILAPBEN</h3>
             </div>
         </div>
         <div class="sidebar-menu">
@@ -41,6 +41,12 @@
                     <a href="{{ route('user.laporanterkirim') }}" class='sidebar-link'>
                         <i data-feather="check-square" width="20"></i>
                         <span>Laporan Terkirim</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('user.rekaplaporan') ? 'active' : '' }}">
+                    <a href="{{ route('user.rekaplaporan') }}" class='sidebar-link' target="_blank">
+                        <i data-feather="printer" width="20"></i>
+                        <span>Rekap Laporan</span>
                     </a>
                 </li>
                 @endrole

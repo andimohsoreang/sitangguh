@@ -61,6 +61,12 @@
                         <h5>Kerugian</h5>
                         <p class="m-0">{{ $lp->kerugian ?? '-' }}</p>
                     </div>
+                    @if ($lp->status == "tolak")
+                    <div class="form-group">
+                        <h5>Alasan Ditolak</h5>
+                        <p class="m-0">{{ $lp->alasan ?? '-' }}</p>
+                    </div>
+                    @endif
                 </div>
                 @if ($lp->darurat == 1)    
                 <div class="card-footer p-0">

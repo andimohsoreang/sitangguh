@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Rules\MatchOldPassword;
+use PDF;
 use Illuminate\Support\Facades\Hash;
 
 class RoleViewController extends Controller
@@ -140,7 +141,7 @@ class RoleViewController extends Controller
         return redirect()->route('petugas.notifikasi');
     }
 
-    public function petugasTolak($id)
+    public function petugasTolak(Request $request, $id)
     {
         $lpb = LaporanBencana::findorfail($id);
         if ($lpb->status !== true) {
@@ -148,11 +149,13 @@ class RoleViewController extends Controller
                 'status' => 'tolak',
                 'read' => true,
                 'petugas_id' => Auth::user()->id,
+                'alasan' => $request->alasan
             ];
         } else {
             $lpb_data = [
                 'status' => 'tolak',
                 'petugas_id' => Auth::user()->id,
+                'alasan' => $request->alasan
             ];
         }
 
@@ -284,5 +287,21 @@ class RoleViewController extends Controller
         } else if ($user->hasRole('user')) {
             return redirect()->route('user.profile');
         }
+    }
+
+    public function userrekap()
+    {
+        $laporan_bencana = LaporanBencana::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $total_laporan = LaporanBencana::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->count();
+        $total_tunggu = LaporanBencana::where('user_id', Auth::user()->id)->where('status', 'tunggu')->orderBy('created_at', 'desc')->count();
+        $total_selesai = LaporanBencana::where('user_id', Auth::user()->id)->where('status', 'selesai')->orderBy('created_at', 'desc')->count();
+        $total_proses = LaporanBencana::where('user_id', Auth::user()->id)->where('status', 'proses')->orderBy('created_at', 'desc')->count();
+        $total_tolak = LaporanBencana::where('user_id', Auth::user()->id)->where('status', 'tolak')->orderBy('created_at', 'desc')->count();
+        // $pdf = PDF::loadView('admin.rekap.rekapuser', compact('laporan_bencana'))->setPaper('a4', 'landscape');
+        // $date = date('Y-m-d');
+        // $time = date('H-i-s');
+        // $namefile = 'Rekap_Laporan_'.Auth::user()->name.'_'.$date.'_'.$time.'.pdf';
+        // return $pdf->download($namefile);
+        return view('admin.rekap.rekapuser', compact('laporan_bencana', 'total_laporan', 'total_tunggu', 'total_selesai', 'total_proses', 'total_tolak'));
     }
 }
